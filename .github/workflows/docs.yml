@@ -30,5 +30,5 @@ jobs:
         uses: Cecilapp/GitHub-Pages-deploy@master
         env:
           EMAIL: ryan@murage.ca
-          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BUILD_DIR: www
