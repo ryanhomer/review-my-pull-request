@@ -13,8 +13,8 @@ jobs:
           persist-credentials: false
       - name: Create Stuff
         run: |
-          mkdir -p www
-          cat > www/index.html <<EOL
+          mkdir -p www/_site
+          cat > www/_site/index.html <<EOL
           <!doctype html>
           <html>
             <head>
@@ -27,7 +27,7 @@ jobs:
           EOL
       - name: Deploy
         if: success()
-        uses: Cecilapp/GitHub-Pages-deploy@master
+        run:
         env:
           EMAIL: ryan@murage.ca
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
