@@ -27,7 +27,7 @@ jobs:
           EOL
       - name: Deploy
         if: success()
-        run:
+        uses: Cecilapp/GitHub-Pages-deploy@master
         env:
           EMAIL: ryan@murage.ca
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
