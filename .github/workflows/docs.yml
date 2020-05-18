@@ -50,21 +50,29 @@ jobs:
           cd $HOME
           git config --global user.name "$GITHUB_ACTOR"
           git config --global user.email "$EMAIL"
-          echo 1
           if [ -z "$(git ls-remote --heads https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})" ]; then
+            echo 1
             git clone --quiet https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH > /dev/null
+            echo 2
             cd $TARGET_BRANCH
+            echo 3
             git checkout --orphan $TARGET_BRANCH
+            echo 4
             git rm -rf .
+            echo 5
             echo "$REPONAME" > README.md
+            echo 6
             git add README.md
+            echo 7
             git commit -a -m "Create $TARGET_BRANCH branch"
+            echo 8
             git push origin $TARGET_BRANCH
+            echo 9
             cd ..
+            echo 10
           else
             git clone --quiet --branch=$TARGET_BRANCH https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH > /dev/null
           fi
-          echo 2
           cp -R $TARGET_BRANCH/.git $HOME/.git
           rm -rf $TARGET_BRANCH/*
           cp -R $HOME/.git $TARGET_BRANCH/.git
@@ -84,11 +92,8 @@ jobs:
           if [ -z "$(git status --porcelain)" ]; then
             echo "Nothing to deploy"
           else
-            echo 3
             git add -Af .
-            echo 4
             git commit -m "$GITHUB_ACTOR published a site update"
-            echo 5
             git push -fq origin $TARGET_BRANCH > /dev/null
           fi
 
