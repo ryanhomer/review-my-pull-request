@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - gh-pages
+      - master
 
 jobs:
   build-and-deploy:
@@ -25,10 +25,7 @@ jobs:
           EOL
       - name: Deploy
         if: success()
-        #uses: Cecilapp/GitHub-Pages-deploy@master
-        run: |
-          TARGET_BRANCH=gh-pages
-          git clone --branch=$TARGET_BRANCH https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH
+        uses: Cecilapp/GitHub-Pages-deploy@master
         env:
           EMAIL: ryan@murage.ca
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
