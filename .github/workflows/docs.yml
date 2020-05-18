@@ -13,6 +13,7 @@ jobs:
           persist-credentials: false
       - name: Create Stuff
         run: |
+          mkdir -p www
           cat > www/index.html <<EOL
           <!doctype html>
           <html>
