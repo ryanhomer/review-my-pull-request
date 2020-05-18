@@ -51,9 +51,9 @@ jobs:
           git config --global user.name "$GITHUB_ACTOR"
           #git config --global user.email "$EMAIL"
           git config user.email "${GITHUB_ACTOR}@bots.github.com"
-          if [ -z "$(git ls-remote --heads https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})" ]; then
+          if [ -z "$(git ls-remote --heads https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})" ]; then
             echo 1
-            git clone --quiet https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH > /dev/null
+            git clone --quiet https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH > /dev/null
             echo 2
             cd $TARGET_BRANCH
             echo 3
@@ -72,7 +72,7 @@ jobs:
             cd ..
             echo 10
           else
-            git clone --quiet --branch=$TARGET_BRANCH https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH > /dev/null
+            git clone --quiet --branch=$TARGET_BRANCH https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH > /dev/null
           fi
           cp -R $TARGET_BRANCH/.git $HOME/.git
           rm -rf $TARGET_BRANCH/*
