@@ -49,8 +49,7 @@ jobs:
           cp -R $BUILD_DIR/* $HOME/$BUILD_DIR/
           cd $HOME
           git config --global user.name "$GITHUB_ACTOR"
-          #git config --global user.email "$EMAIL"
-          git config user.email "${GITHUB_ACTOR}@bots.github.com"
+          git config --global user.email "$EMAIL"
           if [ -z "$(git ls-remote --heads https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})" ]; then
             echo 1
             git clone --quiet https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH > /dev/null
@@ -101,5 +100,5 @@ jobs:
           echo "### Finished deploy"
         env:
           EMAIL: ryan@murage.ca
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BUILD_DIR: www/_site/
