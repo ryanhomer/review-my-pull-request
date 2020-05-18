@@ -26,7 +26,18 @@ jobs:
       - name: Deploy
         if: success()
         #uses: Cecilapp/GitHub-Pages-deploy@master
-        run: git ls-remote --heads https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH}
+        run: |
+          git ls-remote --heads https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH}
+          REPONAME="$(echo $GITHUB_REPOSITORY| cut -d'/' -f 2)"
+          OWNER="$(echo $GITHUB_REPOSITORY| cut -d'/' -f 1)"
+          GHIO="${OWNER}.github.io"
+          # target branch
+          if [[ "$REPONAME" == "$GHIO" ]]; then
+            TARGET_BRANCH="master"
+          else
+            TARGET_BRANCH="gh-pages"
+          fi
+          echo $TARGET_BRANCH
         env:
           EMAIL: ryan@murage.ca
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
