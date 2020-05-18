@@ -26,7 +26,7 @@ jobs:
       - name: Deploy
         if: success()
         #uses: Cecilapp/GitHub-Pages-deploy@master
-        runs: git ls-remote --heads https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})
+        run: git ls-remote --heads https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})
         env:
           EMAIL: ryan@murage.ca
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
