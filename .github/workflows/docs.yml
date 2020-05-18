@@ -29,6 +29,6 @@ jobs:
         if: success()
         uses: Cecilapp/GitHub-Pages-deploy@master
         env:
-          EMAIL: ryanhomer@gmail.com
+          EMAIL: ryan@murage.ca
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BUILD_DIR: www
