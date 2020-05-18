@@ -25,7 +25,14 @@ jobs:
           EOL
       - name: Deploy
         if: success()
-        uses: Cecilapp/GitHub-Pages-deploy@master
+        #uses: Cecilapp/GitHub-Pages-deploy@master
+        run: |
+          TARGET_BRANCH=gh-pages
+          if [ -z "$(git ls-remote --heads https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})" ]; then
+            echo ONE
+          else
+            echo TWO
+          fi
         env:
           EMAIL: ryan@murage.ca
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
