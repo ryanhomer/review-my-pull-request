@@ -43,6 +43,8 @@ jobs:
 
           echo "### Started deploy to $GITHUB_REPOSITORY/$TARGET_BRANCH"
 
+          echo "GITHUB_ACTOR=$GITHUB_ACTOR"
+
           # remove the ending slash if exists
           BUILD_DIR=${BUILD_DIR%/}
           mkdir -p $HOME/$BUILD_DIR
