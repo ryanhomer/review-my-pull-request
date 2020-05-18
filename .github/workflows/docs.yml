@@ -1,0 +1,33 @@
+on:
+  push:
+    branches:
+      - docs
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Create Stuff
+        run: |
+          cat > www/index.html <<EOL
+          <!doctype html>
+          <html>
+            <head>
+              <title>GH Pages deploy test</title>
+            </head>
+            <body>
+              <p>Testing, testing, 1, 2, 3, 4.</p>
+            </body>
+          </html>
+          EOL
+      - name: Deploy
+        if: success()
+        uses: Cecilapp/GitHub-Pages-deploy@master
+        env:
+          EMAIL: ryanhomer@gmail.com
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BUILD_DIR: www
